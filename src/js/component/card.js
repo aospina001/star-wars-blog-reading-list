@@ -18,17 +18,19 @@ export const Card = props => {
 					<p className="card-text">
 						Some quick example text to build on the card title and make up the bulk of the cards content.
 					</p>
-					<a href="#" className="btn btn-primary">
-						More info
-					</a>
-					<button
-						type="button"
-						className="btn btn-primary"
-						onClick={e => {
-							actions.addToFavorites(props.url, props.name);
-						}}>
-						<i className="far fa-heart" />
-					</button>
+					<div className="d-flex justify-content-between">
+						<Link to={`/${props.details}/${props.id}/${props.name}`} className="btn btn-dark">
+							More info
+						</Link>
+						<button
+							type="button"
+							className="btn btn-outline-danger"
+							onClick={e => {
+								actions.addToFavorites(props.url, props.name);
+							}}>
+							<i className="far fa-heart" />
+						</button>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -36,5 +38,7 @@ export const Card = props => {
 };
 Card.propTypes = {
 	name: PropTypes.string,
-	url: PropTypes.string
+	url: PropTypes.string,
+	id: PropTypes.string,
+	details: PropTypes.string
 };

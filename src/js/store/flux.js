@@ -56,15 +56,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 			addToFavorites: (id, name) => {
 				const store = getStore();
 				store.favorites;
-				setStore({
-					favorites: [
-						...store.favorites,
-						{
-							id,
-							name
-						}
-					]
-				});
+				const foundItem = store.favorites.find(item => item.name == name);
+				console.log(foundItem);
+				if (foundItem == undefined) {
+					setStore({
+						favorites: [
+							...store.favorites,
+							{
+								id,
+								name
+							}
+						]
+					});
+				}
 			},
 			changeColor: (index, color) => {
 				//get the store
@@ -79,6 +83,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				//reset the global store
 				setStore({ demo: demo });
+			},
+			deleteFavorite: i => {
+				const store = getStore();
+				const filteredFavorites = store.favorites.filter((arrayElement, arrayIndex) => i !== arrayIndex);
+				setStore({ favorites: filteredFavorites });
 			}
 		}
 	};
